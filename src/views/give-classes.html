@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8257e5">
+
+    <link rel="shortcut icon" href="/images/favicon.png" type="image/png">
+    <title>Proffy | Sua plataforma de estudos online</title>
+
+    <link rel="stylesheet" href="./styles/global.css"/>
+    <link rel="stylesheet" href="./styles/partials/give-classes-page.css"/>
+    <link rel="stylesheet" href="./styles/partials/header.css">
+    <link rel="stylesheet" href="./styles/partials/forms.css">
+
+    <script src="/scripts/addField.js" defer></script> 
+  </head>
+
+<body id="page-give-classes">
+
+  <div id="container">
+
+    <header class="page-header">
+      <div class="top-bar-container">
+        <a href="/"> 
+          <img src="./images/icons/back.svg" alt="voltar">
+        </a>
+        <img src="./images/logo.svg" alt="proffy">
+      </div>
+
+      <div class="header-content">
+        <strong>Que incrível que você quer dar aulas</strong>
+        <p>O primeiro passo é, preencher o seu formulário de inscrição</p>
+      </div>
+    </header>
+
+    <main>
+      <form action="/save-classes" id="create-class" method="POST">
+        <fieldset>
+          <legend>Seus Dados</legend>
+
+          <div class="input-block">
+            <label for="name">Nome Completo</label>
+            <input name="name" id="name" required>
+          </div>
+
+          <div class="input-block">
+            <label for="avatar">Link de foto de perfil 
+              <small>(comeco com https://)</small>
+            </label>
+            <input name="avatar" id="avatar" type="url" required>
+          </div>
+
+          <div class="input-block">
+            <label for="whatsapp">WhatsApp
+              <small>(somente números (DDD e digito 9))</small>
+            </label>
+            <input  name="whatsapp" id="whatsapp" type="number" required>
+          </div>
+
+          <div class="input-block">
+            <label for="bio">Biografia</label>
+            <textarea name="bio" id="bio" class="textarea-block"required></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Sobre a aula</legend>
+
+          <div class="select-block">
+            <label for="subject">Matéria</label>
+            <select name="subject" id="subject" required>
+              <option value=""  hidden="">Selecione qual você quer ensinar</option>
+
+              {%for subject in subjects%}
+                <option value={{loop.index}}>{{subject}}</option>
+              {%endfor%}
+            </select>
+          </div>
+
+          <div class="input-block">
+            <label for="cost">Custo da sua hora/aula
+              <small>(R$)</small>
+            </label>
+            <input name="cost" id="cost" type="number" required>
+          </div>
+        </fieldset>
+
+        
+        <fieldset id="schedule-items">
+          <legend>Horários Disponíveis 
+            <button id="time-add" type="button">+ Novo Horário</button>
+          </legend>
+
+          <div class="schedule-item">
+
+            <div class="select-block">
+              <label for="weekday">Dia da semana</label>
+              <select name="weekday[]" id="weekday" required>
+                <option value="" hidden="">Selecione um dia</option>
+
+                {%for day in weekdays%}
+                  <option value={{loop.index0}}>{{day}}</option>
+                {%endfor%}
+
+              </select>
+            </div>
+
+            <div class="input-block">
+              <label for="time_from">Das</label>
+              <input type="time" name="time_from[]" required>
+            </div>
+            <div class="input-block">
+              <label for="time_to">Até</label>
+              <input type="time" name="time_to[]" required>
+            </div>
+
+          </div>
+        </fieldset>
+      </form>
+
+      <footer>
+        <p>
+          <img src="./images/icons/warning.svg" alt="important-warning">
+          Importante! <br>
+          Preencha todos os dados.
+        </p>
+        <button form="create-class" type="submit">Cadastrar</button>
+      </footer>
+    </main>
+
+  </div>
+
+  
+</body>
+</html>
